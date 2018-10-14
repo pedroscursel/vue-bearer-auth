@@ -1,31 +1,3 @@
-<<<<<<< HEAD
-# frotas
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Run your unit tests
-```
-npm run test:unit
-```
-=======
 # vue-bearer-auth
 
 Simples boilerplate criado com vue ui para autenticação em sistemas usando tokens bearer. 
@@ -75,4 +47,3 @@ MIT
    [VueRouter]: <https://github.com/vuejs/vue-router#readme>
    [Vuex]: <https://github.com/vuejs/vuex#readme>
    
->>>>>>> 08c3b292924e9969a47adca00cc84eb2f6196c71
