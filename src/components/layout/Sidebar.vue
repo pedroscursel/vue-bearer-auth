@@ -1,11 +1,15 @@
 <template>
   <div>
-    Home
+    {{ message }}
   </div>
 </template>
 
 <script>
 export default {
-
+  data () {
+    return {
+      message: 'sidebar!'
+    }
+  }
 }
 </script>

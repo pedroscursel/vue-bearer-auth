@@ -1,28 +1,53 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <nprogress-container></nprogress-container>
+    <template v-if="this.$auth.check()">
+      <navbar></navbar>
+      <sidebar></sidebar>
+    </template>
+    <app-main></app-main>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+import NprogressContainer from 'vue-nprogress/src/NprogressContainer'
+import { Sidebar, Navbar, AppMain } from './components/layout'
+
+export default {
+  components: {
+    Sidebar,
+    Navbar,
+    AppMain,
+    NprogressContainer
+  }
 }
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
+</script>
+
+<style lang="scss">
+$animationDuration: 0.5s;
+@import '~vue2-animate/src/sass/vue2-animate';
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+body{
+  margin: 0;
+  padding: 0;
+}
+.nprogress-container{
+  position: fixed !important;
+  width: 100%;
+  height: 50px;
+  z-index: 2048;
+  pointer-events: none;
+  #nprogress{
+    $color: purple;
+    .bar{
+      background-color: $color;
+    }
+    .peg{
+      box-shadow: 0 0 10px $color, 0 0 5px $color;
+    }
+    .spinner-icon{
+      border-top-color: $color;
+      border-left-color: $color;
     }
   }
 }
