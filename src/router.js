@@ -8,27 +8,41 @@ export default new Router({
   linkActiveClass: 'active',
   routes: [
     {
-      name: 'login',
+      path: '*',
+      redirect: '/'
+    },
+    // HOME PAGE
+    {
+      name: 'Home',
+      path: '/',
+      component: () => import('./views/Home')
+    },
+    // LOGIN PAGE
+    {
+      name: 'Login',
       path: '/login',
       component: () => import('./views/Login'),
       meta: {
         auth: false
       }
     },
-    // HOME
+    // WELCOME LOGGED
     {
-      name: 'Home',
-      path: '/home',
+      name: 'Welcome',
+      path: '/welcome',
       meta: {
         auth: true
       },
-      component: () => import('./views/Home')
+      component: () => import('./views/Welcome')
     },
     // VEHICLES
     {
       name: 'Vehicles',
       path: '/vehicles',
-      component: () => import('./views/vehicles/List')
+      component: () => import('./views/vehicles/List'),
+      meta: {
+        auth: true
+      }
     }
   ]
 })

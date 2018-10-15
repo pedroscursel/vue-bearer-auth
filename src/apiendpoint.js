@@ -2,6 +2,7 @@ const IS_LOCAL = process.env.NODE_ENV !== 'production'
 const API_BASE_URL = IS_LOCAL ? '' : ''
 
 const LOGIN_URL = 'http://staging.autenticacao.api.fabrika162.com.br/login'
+const AUTH_USER = 'http://staging.autenticacao.api.fabrika162.com.br/users'
 
 const FROTAS_BASE = 'http://staging.frotas.api.fabrika162.com.br'
 const FROTAS_CARS = 'http://staging.frotas.api.fabrika162.com.br/cars'
@@ -20,6 +21,7 @@ export default {
   IS_LOCAL,
   API_BASE_URL,
   LOGIN_URL,
+  AUTH_USER,
   FROTAS_BASE,
   FROTAS_CARS,
   FROTAS_DRIVERS,

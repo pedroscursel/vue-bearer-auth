@@ -7,7 +7,7 @@
           leave-active-class="bounceOut"
         >
         <div class="row" v-if="error">
-          <div class="col-6 ml-auto mr-auto">
+          <div class="col-sm-9 col-md-6 ml-auto mr-auto">
             <div class="alert alert-danger" role="alert">
               <p class="messages text-center mb-0">{{ callBackMsg }}</p>
             </div>
@@ -18,7 +18,7 @@
         <div class="col-12">
           <h1 class="text-center">Login</h1>
         </div>
-        <div class="col-6 ml-auto mr-auto">
+        <div class="col-sm-9 col-md-6 ml-auto mr-auto">
           <form v-on:submit.prevent="login">
             <div class="form-group">
               <label for="user">Usuário:</label>
@@ -28,7 +28,7 @@
                 enter-active-class="bounceIn"
                 leave-active-class="bounceOut"
               >
-                <small v-if="userNameErr" class="form-text text-muted"> {{ callBackMsg }} </small>
+                <small v-if="userNameErr" class="form-text text-danger"> {{ callBackMsg }} </small>
               </transition>
             </div>
             <div class="form-group">
@@ -39,14 +39,14 @@
                 enter-active-class="bounceIn"
                 leave-active-class="bounceOut"
               >
-                <small v-if="pswdNameErr" class="form-text text-muted"> {{ callBackMsg }} </small>
+                <small v-if="pswdNameErr" class="form-text text-danger"> {{ callBackMsg }} </small>
               </transition>
             </div>
             <div class="form-group d-flex align-items-center">
               <label for="rememberME" class="mb-0 mr-2">Lembrar:</label>
               <input v-model="data.rememberMe" id="rememberME" type="checkbox">
             </div>
-            <div class="form-group">
+            <div class="form-group text-center">
               <button type="submit" class="btn btn-primary">Entrar</button>
             </div>
           </form>
@@ -107,8 +107,9 @@ export default {
         data: this.data.body,
         rememberMe: this.data.rememberMe,
         redirect: {
-          name: redirect ? redirect.from.name : 'Vehicles'
+          name: redirect ? redirect.from.name : 'Welcome'
         },
+        fetchUser: false,
         success (res) {
           console.log('Token: ' + JSON.stringify(this.$auth.token()))
         },
