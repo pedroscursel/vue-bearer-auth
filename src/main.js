@@ -13,6 +13,15 @@ import './registerServiceWorker'
 import App from './App.vue'
 import apiendpoint from './apiendpoint'
 
+// FONTAWESOME
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+// BOOTSTRAPVUE
+import BootstrapVue from 'bootstrap-vue'
+Vue.use(BootstrapVue)
+
 Vue.router = router
 Vue.use(VueAxios, axios)
 Vue.use(VueAuth, {
@@ -46,6 +55,10 @@ Vue.config.devtools = true
 const nprogress = new NProgress({
   parent: '.nprogress-container'
 })
+
+library.add(faSignOutAlt)
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 new Vue({
   router,

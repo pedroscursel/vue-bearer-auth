@@ -1,7 +1,13 @@
 <template>
-  <div>
-    {{ message }}
-  </div>
+  <navbar class="navbar navbar-light">
+    <div>
+      <button 
+        @click="logout"
+        class="btn btn-sm btn-primary">
+          SAIR | <font-awesome-icon icon="sign-out-alt" />
+        </button>
+    </div>
+  </navbar>
 </template>
 
 <script>
@@ -13,3 +19,7 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  
+</style>

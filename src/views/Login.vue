@@ -1,39 +1,33 @@
 <template>
   <section id="login">
     <div class="container">
-       <transition
-          name="bounce"
-          enter-active-class="bounceIn"
-          leave-active-class="bounceOut"
-        >
-        <div class="row" v-if="error">
-          <div class="col-sm-9 col-md-6 ml-auto mr-auto">
-            <div class="alert alert-danger" role="alert">
-              <p class="messages text-center mb-0">{{ callBackMsg }}</p>
-            </div>
-          </div>
-        </div>
-       </transition>
       <div class="row">
         <div class="col-12">
           <h1 class="text-center">Login</h1>
         </div>
         <div class="col-sm-9 col-md-6 ml-auto mr-auto">
-          <form v-on:submit.prevent="login">
-            <div class="form-group">
-              <label for="user">Usuário:</label>
-              <input v-model="data.body.username" id="user" type="text" class="form-control">
+          <b-form v-on:submit.prevent="login">
+            <b-form-group
+              label="Usuário:"
+              label-for="user">
+              <b-form-input id="user"
+                type="text"
+                v-model="data.body.username"></b-form-input>
               <transition
                 name="bounce"
                 enter-active-class="bounceIn"
-                leave-active-class="bounceOut"
-              >
+                leave-active-class="bounceOut">
                 <small v-if="userNameErr" class="form-text text-danger"> {{ callBackMsg }} </small>
               </transition>
-            </div>
-            <div class="form-group">
-              <label for="pswd">Senha:</label>
-              <input v-model="data.body.password" id="pswd" type="password" class="form-control">
+            </b-form-group>
+
+            <b-form-group
+              label="Senha:"
+              label-for="pswd"
+              class="mt-4 pt-1">
+              <b-form-input id="pswd"
+                type="password"
+                v-model="data.body.password"></b-form-input>  
               <transition
                 name="bounce"
                 enter-active-class="bounceIn"
@@ -41,17 +35,39 @@
               >
                 <small v-if="pswdNameErr" class="form-text text-danger"> {{ callBackMsg }} </small>
               </transition>
-            </div>
-            <div class="form-group d-flex align-items-center">
-              <label for="rememberME" class="mb-0 mr-2">Lembrar:</label>
-              <input v-model="data.rememberMe" id="rememberME" type="checkbox">
-            </div>
-            <div class="form-group text-center">
-              <button type="submit" class="btn btn-primary">Entrar</button>
-            </div>
-          </form>
+            </b-form-group>
+
+            <b-form-group
+              class="mt-4 pt-1 d-flex align-items-center">
+              <b-form-checkbox id="rememberMe"
+                type="checkbox"
+                v-model="data.rememberMe"
+                class="ml-2">Lembrar</b-form-checkbox>
+            </b-form-group>
+            
+            <b-form-group
+              class="text-center">
+              <b-button 
+                type="submit"
+                variant="primary">Save</b-button>
+            </b-form-group>
+
+          </b-form>
         </div>
       </div>
+      <transition
+          name="bounce"
+          enter-active-class="bounceIn"
+          leave-active-class="bounceOut"
+        >
+        <div class="row mt-4 pt-1" v-if="error">
+          <div class="col-sm-9 col-md-6 ml-auto mr-auto">
+            <div class="alert" :class="errorClass" role="alert">
+              <p class="messages text-center mb-0">{{ callBackMsg }}</p>
+            </div>
+          </div>
+        </div>
+      </transition>
     </div>
   </section>
 </template>
@@ -68,6 +84,7 @@ export default {
         rememberMe: false
       },
       error: false,
+      errorClass: null,
       userNameErr: false,
       pswdNameErr: false,
       callBackMsg: null
@@ -76,7 +93,9 @@ export default {
 
   mounted () {
     if (this.$auth.redirect()) {
-      this.messages = 'Você veio redirecionado de: ' + this.$auth.redirect().from.name + ', para acessar este local, antes faça login!'
+      this.error = true
+      this.errorClass = 'alert-warning'
+      this.callBackMsg = 'Você veio redirecionado de: ' + this.$auth.redirect().from.name + ', para acessar este local, antes faça login!'
     }
   },
 
@@ -95,6 +114,12 @@ export default {
       }
     },
 
+    areYouSure (maybe) {
+      if (maybe) {
+        return true
+      }
+    },
+
     login () {
       this.error = false
       this.userNameErr = false
@@ -105,7 +130,7 @@ export default {
           'Content-Type': 'application/json'
         },
         data: this.data.body,
-        rememberMe: this.data.rememberMe,
+        rememberMe: this.areYouSure(this.data.rememberMe),
         redirect: {
           name: redirect ? redirect.from.name : 'Welcome'
         },
@@ -120,15 +145,18 @@ export default {
           if (errStatus === 422) {
             if (err.response.data.username && err.response.data.password) {
               this.error = true
+              this.errorClass = 'alert-danger'
               this.callBackMsg = 'Preencha os campos de usuário e senha!'
             } else {
               this.whatError(err.response.data.username)
             }
           } else if (errStatus === 401) {
             this.error = true
+            this.errorClass = 'alert-danger'
             this.callBackMsg = this.translateMsg(errMessage)
           } else if (errStatus === 500) {
             this.error = true
+            this.errorClass = 'alert-info'
             this.callBackMsg = 'Erro no servidor, favor contatar a equipe de desenvolvimento.'
           }
         }
@@ -141,23 +169,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import "~bootstrap/scss/functions";
-  @import "~bootstrap/scss/variables";
-  @import "~bootstrap/scss/mixins";
-  @import "~bootstrap/scss/root";
-  @import "~bootstrap/scss/reboot";
-  @import "~bootstrap/scss/type";
-  @import "~bootstrap/scss/grid";
-  @import "~bootstrap/scss/forms";
-  @import "~bootstrap/scss/buttons";
-  @import "~bootstrap/scss/input-group";
-  @import "~bootstrap/scss/button-group";
-  @import "~bootstrap/scss/alert";
-  @import "~bootstrap/scss/utilities";
   *{
     font-family: 'Roboto', sans-serif;
   }
   #login{
     padding-top: 10vh;
+    .text-danger{
+      position: absolute;
+    }
   }
 </style>
