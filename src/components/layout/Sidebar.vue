@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <section id="sidebar">
     {{ message }}
-  </div>
+  </section>
 </template>
 
 <script>
@@ -13,3 +13,17 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  @import "~sass-rem";
+  @mixin calc($property, $expression) {
+    #{$property}: calc(#{$expression});
+  }
+  #sidebar{
+    @include calc( height, '100vh - 4.1rem');
+    width: rem(200px);
+    border-right: rem(1px solid #49A0B5);
+    position: absolute;
+    background-color: #ffffff;
+  }
+</style>

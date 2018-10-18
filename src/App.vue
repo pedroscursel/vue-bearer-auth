@@ -27,8 +27,8 @@ export default {
 $animationDuration: 0.5s;
 @import '~vue2-animate/src/sass/vue2-animate';
 @import url('https://fonts.googleapis.com/css?family=Roboto');
-@import '~bootstrap/scss/bootstrap'; 
-@import '~bootstrap-vue/dist/bootstrap-vue.css'; 
+@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap-vue/dist/bootstrap-vue.css';
 body{
   margin: 0;
   padding: 0;
@@ -52,5 +52,8 @@ body{
       border-left-color: $color;
     }
   }
+}
+@mixin calc($property, $expression) {
+  #{$property}: calc(#{$expression});
 }
 </style>

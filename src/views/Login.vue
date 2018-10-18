@@ -1,11 +1,11 @@
 <template>
   <section id="login">
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
+    <b-container>
+      <b-row>
+        <b-col sm="12">
           <h1 class="text-center">Login</h1>
-        </div>
-        <div class="col-sm-9 col-md-6 ml-auto mr-auto">
+        </b-col>
+        <b-col sm="9" md="6" class="ml-auto mr-auto">
           <b-form v-on:submit.prevent="login">
             <b-form-group
               label="Usuário:"
@@ -27,7 +27,7 @@
               class="mt-4 pt-1">
               <b-form-input id="pswd"
                 type="password"
-                v-model="data.body.password"></b-form-input>  
+                v-model="data.body.password"></b-form-input>
               <transition
                 name="bounce"
                 enter-active-class="bounceIn"
@@ -36,7 +36,6 @@
                 <small v-if="pswdNameErr" class="form-text text-danger"> {{ callBackMsg }} </small>
               </transition>
             </b-form-group>
-
             <b-form-group
               class="mt-4 pt-1 d-flex align-items-center">
               <b-form-checkbox id="rememberMe"
@@ -44,31 +43,33 @@
                 v-model="data.rememberMe"
                 class="ml-2">Lembrar</b-form-checkbox>
             </b-form-group>
-            
             <b-form-group
               class="text-center">
-              <b-button 
+              <b-button
                 type="submit"
-                variant="primary">Save</b-button>
+                variant="primary"
+                class="mr-1">Entrar</b-button>
+              <router-link
+                to="Home"
+                class="btn btn-secondary ml-1">Home</router-link>
             </b-form-group>
-
           </b-form>
-        </div>
-      </div>
+        </b-col>
+      </b-row>
       <transition
           name="bounce"
           enter-active-class="bounceIn"
           leave-active-class="bounceOut"
         >
-        <div class="row mt-4 pt-1" v-if="error">
-          <div class="col-sm-9 col-md-6 ml-auto mr-auto">
+        <b-row class="mt-4 pt-1" v-if="error">
+          <b-col sm="9" md="6" class="ml-auto mr-auto">
             <div class="alert" :class="errorClass" role="alert">
               <p class="messages text-center mb-0">{{ callBackMsg }}</p>
             </div>
-          </div>
-        </div>
+          </b-col>
+        </b-row>
       </transition>
-    </div>
+    </b-container>
   </section>
 </template>
 
@@ -126,9 +127,6 @@ export default {
       this.pswdNameErr = false
       let redirect = this.$auth.redirect()
       this.$auth.login({
-        headers: {
-          'Content-Type': 'application/json'
-        },
         data: this.data.body,
         rememberMe: this.areYouSure(this.data.rememberMe),
         redirect: {
@@ -136,6 +134,7 @@ export default {
         },
         fetchUser: false,
         success (res) {
+          console.log('success ' + this.context)
           console.log('Token: ' + JSON.stringify(this.$auth.token()))
         },
         error (err) {
