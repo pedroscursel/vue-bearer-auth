@@ -41,6 +41,7 @@
               <b-form-checkbox id="rememberMe"
                 type="checkbox"
                 v-model="data.rememberMe"
+                :value="true"
                 class="ml-2">Lembrar</b-form-checkbox>
             </b-form-group>
             <b-form-group
@@ -122,43 +123,9 @@ export default {
     },
 
     login () {
-      this.error = false
-      this.userNameErr = false
-      this.pswdNameErr = false
-      let redirect = this.$auth.redirect()
-      this.$auth.login({
-        data: this.data.body,
-        rememberMe: this.areYouSure(this.data.rememberMe),
-        redirect: {
-          name: redirect ? redirect.from.name : 'Welcome'
-        },
-        fetchUser: false,
-        success (res) {
-          console.log('success ' + this.context)
-          console.log('Token: ' + JSON.stringify(this.$auth.token()))
-        },
-        error (err) {
-          let errStatus = err.response.status
-          let errMessage = err.response.data.status
-
-          if (errStatus === 422) {
-            if (err.response.data.username && err.response.data.password) {
-              this.error = true
-              this.errorClass = 'alert-danger'
-              this.callBackMsg = 'Preencha os campos de usuário e senha!'
-            } else {
-              this.whatError(err.response.data.username)
-            }
-          } else if (errStatus === 401) {
-            this.error = true
-            this.errorClass = 'alert-danger'
-            this.callBackMsg = this.translateMsg(errMessage)
-          } else if (errStatus === 500) {
-            this.error = true
-            this.errorClass = 'alert-info'
-            this.callBackMsg = 'Erro no servidor, favor contatar a equipe de desenvolvimento.'
-          }
-        }
+      this.$store.dispatch('login', {
+        body: this.data.body,
+        rememberMe: this.data.rememberMe
       })
     }
 

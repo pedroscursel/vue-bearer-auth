@@ -1,6 +1,7 @@
 <template>
   <div id="welcome">
-    <router-link to="Vehicles">Veículos</router-link>
+    <router-link to="vehicles">Veículos</router-link>
+    <span v-if="this.$auth.check()">True</span>
   </div>
 </template>
 
@@ -14,7 +15,8 @@ export default {
   *{
     font-family: 'Roboto', sans-serif;
   }
+  @import "~sass-rem";
   #welcome{
-    
+    padding-left: rem(200px);
   }
 </style>

@@ -1,6 +1,10 @@
 <template>
   <section id="sidebar">
-    {{ message }}
+    <ul>
+      <li>{{ message }}</li>
+      <li><router-link to="welcome">Welcome</router-link></li>
+      <li><router-link to="vehicles">Veículos</router-link></li>
+    </ul>
   </section>
 </template>
 

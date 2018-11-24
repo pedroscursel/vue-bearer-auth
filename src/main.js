@@ -23,6 +23,7 @@ import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue)
 
 Vue.router = router
+
 Vue.use(VueAxios, axios)
 Vue.use(VueAuth, {
   auth: {
@@ -43,7 +44,7 @@ Vue.use(VueAuth, {
   },
   refreshData: { enabled: false }
 })
-
+App.router = Vue.router
 Vue.use(VeeValidate)
 Vue.use(NProgress)
 

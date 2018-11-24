@@ -28,6 +28,11 @@ export default {
       userName: null,
       avatar: null
     }
+  },
+  methods: {
+    logout: () => {
+      this.$auth.logout()
+    }
   }
 }
 </script>
