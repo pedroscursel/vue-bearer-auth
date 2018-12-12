@@ -1,4 +1,6 @@
 export default {
-  idToke: null,
-  userID: null
+  tokenID: null,
+  userID: null,
+  accountID: null,
+  userOBJ: null
 }

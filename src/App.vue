@@ -1,7 +1,7 @@
 <template>
-  <div id="app" v-if="$auth.ready()">
+  <div id="app">
     <nprogress-container></nprogress-container>
-    <template v-if="this.$auth.check()">
+    <template>
       <navbar></navbar>
       <sidebar></sidebar>
     </template>

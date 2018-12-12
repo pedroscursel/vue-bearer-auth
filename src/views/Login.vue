@@ -94,41 +94,17 @@ export default {
   },
 
   mounted () {
-    if (this.$auth.redirect()) {
-      this.error = true
-      this.errorClass = 'alert-warning'
-      this.callBackMsg = 'Você veio redirecionado de: ' + this.$auth.redirect().from.name + ', para acessar este local, antes faça login!'
-    }
+    // if (this.$auth.redirect()) {
+    //   this.error = true
+    //   this.errorClass = 'alert-warning'
+    //   this.callBackMsg = 'Você veio redirecionado de: ' + this.$auth.redirect().from.name + ', para acessar este local, antes faça login!'
+    // }
   },
 
   methods: {
-    whatError (isName) {
-      isName ? this.userNameErr = true : this.pswdNameErr = true
-      let console = isName ? this.callBackMsg = 'Preencha o campo de usuário' : this.callBackMsg = 'Preencha o campo de senha'
-      return console
-    },
-
-    translateMsg (msg) {
-      if (msg === 'fail') {
-        return 'Senha inválida!'
-      } else if (msg === 'Username not found') {
-        return 'Usuário não encontrado...'
-      }
-    },
-
-    areYouSure (maybe) {
-      if (maybe) {
-        return true
-      }
-    },
-
     login () {
-      this.$store.dispatch('login', {
-        body: this.data.body,
-        rememberMe: this.data.rememberMe
-      })
+      this.$store.dispatch('login', this.data)
     }
-
   }
 
 }

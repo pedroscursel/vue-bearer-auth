@@ -1,5 +1,5 @@
 <template>
-  <navbar class="navbar navbar-light align-items-center justify-content-end">
+  <b-navbar class="navbar navbar-light align-items-center justify-content-end">
     <div class="profile">
       <b-dropdown id="ddown-right" size="sm" right text="Pedro H C Scursel" variant="info" class="mr-2">
         <b-dropdown-item href="#">Configurações</b-dropdown-item>
@@ -12,7 +12,7 @@
           SAIR <font-awesome-icon icon="sign-out-alt" class="ml-2" />
         </button>
     </div>
-  </navbar>
+  </b-navbar>
 </template>
 
 <script>
@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     logout: () => {
-      this.$auth.logout()
+
     }
   }
 }

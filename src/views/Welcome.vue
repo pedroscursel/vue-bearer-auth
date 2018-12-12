@@ -1,7 +1,7 @@
 <template>
   <div id="welcome">
     <router-link to="vehicles">Veículos</router-link>
-    <span v-if="this.$auth.check()">True</span>
+    <span>True</span>
   </div>
 </template>
 
